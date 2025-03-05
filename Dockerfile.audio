@@ -1,0 +1,19 @@
+# Dockerfile para extraer audio de videos
+FROM python:3.9-slim
+
+# Actualizar repositorios e instalar FFmpeg
+RUN apt-get update && \
+    apt-get install -y ffmpeg && \
+    rm -rf /var/lib/apt/lists/*
+
+# Instalar librerías de Python para procesamiento de audio y video
+RUN pip install --no-cache-dir \
+    numpy \
+    pandas \
+    moviepy
+
+# Establecer el directorio de trabajo
+WORKDIR /scripts
+
+# Comando por defecto (se puede sobrescribir en tiempo de ejecución)
+CMD ["python"]

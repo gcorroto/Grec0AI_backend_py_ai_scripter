@@ -1,0 +1,23 @@
+# Dockerfile para generar imágenes de gráficas
+FROM python:3.9-slim
+
+# Actualizar repositorios e instalar dependencias básicas
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    && rm -rf /var/lib/apt/lists/*
+
+# Instalar librerías de Python para generación de gráficos
+RUN pip install --no-cache-dir \
+    numpy \
+    pandas \
+    matplotlib \
+    seaborn \
+    plotly \
+    bokeh \
+    pillow
+
+# Establecer el directorio de trabajo
+WORKDIR /scripts
+
+# Comando por defecto (se puede sobrescribir en tiempo de ejecución)
+CMD ["python"]
