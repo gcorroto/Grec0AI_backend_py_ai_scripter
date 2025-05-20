@@ -1,0 +1,31 @@
+# Dockerfile para instalar MCPs de IA con Python
+FROM python:3.10-slim
+
+# Actualizar repositorios e instalar dependencias necesarias para compilación
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    build-essential \
+    git \
+    ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+
+# Actualizar pip a la última versión
+RUN python -m pip install --upgrade pip
+
+# Instalar algunas librerías base comunes para IA
+RUN pip install --no-cache-dir \
+    numpy \
+    pandas \
+    scikit-learn \
+    torch \
+    transformers \
+    tensorflow
+
+# Establecer el directorio de trabajo para los scripts y archivos MCP
+WORKDIR /mcp
+
+# Variable de entorno para indicar que estamos en un entorno de ejecución MCP
+ENV MCP_ENVIRONMENT=true
+
+# Comando por defecto para ejecutar Python
+CMD ["python"]
