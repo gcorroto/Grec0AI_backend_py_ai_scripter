@@ -4,6 +4,7 @@ FROM python:3.9-slim
 # Actualizar repositorios e instalar dependencias básicas
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
+    graphviz \
     && rm -rf /var/lib/apt/lists/*
 
 # Instalar librerías de Python para generación de gráficos
@@ -14,7 +15,8 @@ RUN pip install --no-cache-dir \
     seaborn \
     plotly \
     bokeh \
-    pillow
+    pillow \
+    graphviz
 
 # Establecer el directorio de trabajo
 WORKDIR /scripts
