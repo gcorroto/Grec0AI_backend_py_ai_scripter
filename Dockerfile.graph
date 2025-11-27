@@ -1,4 +1,4 @@
-# Dockerfile para generar imágenes de gráficas
+# Dockerfile para generar imágenes de gráficas (py-graph)
 FROM python:3.9-slim
 
 # Actualizar repositorios e instalar dependencias básicas
@@ -7,7 +7,7 @@ RUN apt-get update && \
     graphviz \
     && rm -rf /var/lib/apt/lists/*
 
-# Instalar librerías de Python para generación de gráficos
+# Instalar librerías de Python para generación de gráficos y análisis
 RUN pip install --no-cache-dir \
     numpy \
     pandas \
@@ -16,7 +16,11 @@ RUN pip install --no-cache-dir \
     plotly \
     bokeh \
     pillow \
-    graphviz
+    graphviz \
+    scipy \
+    networkx \
+    scikit-learn \
+    statsmodels
 
 # Establecer el directorio de trabajo
 WORKDIR /scripts
