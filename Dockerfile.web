@@ -1,0 +1,39 @@
+# Dockerfile para scraping web avanzado y automatización
+FROM python:3.9-slim
+
+# Instalar navegadores y dependencias
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    wget \
+    gnupg \
+    curl \
+    chromium \
+    chromium-driver \
+    && rm -rf /var/lib/apt/lists/*
+
+# Librerías para web scraping y automatización
+RUN pip install --no-cache-dir \
+    selenium \
+    playwright \
+    beautifulsoup4 \
+    scrapy \
+    requests \
+    httpx \
+    aiohttp \
+    lxml \
+    html5lib \
+    pyquery \
+    requests-html \
+    fake-useragent \
+    cloudscraper \
+    parsel \
+    trafilatura \
+    newspaper3k \
+    feedparser \
+    justext
+
+# Instalar navegadores de Playwright
+RUN playwright install chromium firefox
+
+WORKDIR /scripts
+CMD ["python"]

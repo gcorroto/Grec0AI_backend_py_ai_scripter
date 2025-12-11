@@ -1,0 +1,28 @@
+# Dockerfile para análisis y generación de música
+FROM python:3.9-slim
+
+# Instalar FFmpeg y dependencias de audio
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    ffmpeg \
+    libsndfile1 \
+    && rm -rf /var/lib/apt/lists/*
+
+# Librerías para procesamiento de música y audio
+RUN pip install --no-cache-dir \
+    librosa \
+    pydub \
+    soundfile \
+    audioread \
+    music21 \
+    pretty_midi \
+    mido \
+    pyaudio \
+    scipy \
+    numpy \
+    matplotlib \
+    seaborn \
+    scikit-learn
+
+WORKDIR /scripts
+CMD ["python"]

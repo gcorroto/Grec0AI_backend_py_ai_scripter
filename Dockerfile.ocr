@@ -1,0 +1,38 @@
+# Dockerfile para OCR y procesamiento de documentos
+FROM python:3.9-slim
+
+# Instalar Tesseract y dependencias
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    tesseract-ocr \
+    tesseract-ocr-spa \
+    tesseract-ocr-eng \
+    libtesseract-dev \
+    poppler-utils \
+    ghostscript \
+    && rm -rf /var/lib/apt/lists/*
+
+# Librerías para OCR y procesamiento de documentos
+RUN pip install --no-cache-dir \
+    pytesseract \
+    pdf2image \
+    PyPDF2 \
+    pdfplumber \
+    pillow \
+    opencv-python-headless \
+    img2pdf \
+    pypdfium2 \
+    easyocr \
+    docx2txt \
+    python-docx \
+    openpyxl \
+    xlrd \
+    pyexcel \
+    pyexcel-xls \
+    pyexcel-xlsx \
+    tabula-py \
+    camelot-py[cv] \
+    pdfminer.six
+
+WORKDIR /scripts
+CMD ["python"]

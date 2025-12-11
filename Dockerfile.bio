@@ -1,0 +1,27 @@
+# Dockerfile para bioinformática y análisis de secuencias
+FROM python:3.9-slim
+
+# Instalar dependencias del sistema
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
+
+# Librerías para bioinformática
+RUN pip install --no-cache-dir \
+    biopython \
+    scikit-bio \
+    ete3 \
+    pysam \
+    pyvcf \
+    pybedtools \
+    pandas \
+    numpy \
+    scipy \
+    matplotlib \
+    seaborn \
+    plotly \
+    networkx
+
+WORKDIR /scripts
+CMD ["python"]

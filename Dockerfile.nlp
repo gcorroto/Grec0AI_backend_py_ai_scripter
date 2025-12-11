@@ -1,0 +1,36 @@
+# Dockerfile para NLP avanzado y generación de texto
+FROM python:3.9-slim
+
+# Instalar dependencias del sistema
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
+
+# Librerías de NLP y procesamiento de lenguaje natural
+RUN pip install --no-cache-dir \
+    transformers \
+    torch \
+    spacy \
+    nltk \
+    gensim \
+    textblob \
+    langdetect \
+    sentencepiece \
+    tokenizers \
+    sentence-transformers \
+    fuzzywuzzy \
+    python-levenshtein \
+    wordcloud \
+    emoji \
+    unidecode \
+    polyglot \
+    pymorphy2
+
+# Descargar modelos básicos de spaCy y NLTK
+RUN python -m spacy download es_core_news_sm && \
+    python -m spacy download en_core_web_sm && \
+    python -c "import nltk; nltk.download('punkt'); nltk.download('stopwords'); nltk.download('wordnet')"
+
+WORKDIR /scripts
+CMD ["python"]

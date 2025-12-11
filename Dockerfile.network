@@ -1,0 +1,36 @@
+# Dockerfile para análisis de redes, seguridad y pentesting
+FROM python:3.9-slim
+
+# Instalar herramientas de red
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    nmap \
+    tcpdump \
+    net-tools \
+    iputils-ping \
+    && rm -rf /var/lib/apt/lists/*
+
+# Librerías para análisis de redes y seguridad
+RUN pip install --no-cache-dir \
+    scapy \
+    nmap \
+    impacket \
+    pyshark \
+    dpkt \
+    pcapy-ng \
+    netaddr \
+    ipaddress \
+    dnspython \
+    paramiko \
+    fabric \
+    requests \
+    urllib3 \
+    pycryptodome \
+    cryptography \
+    hashlib \
+    networkx \
+    matplotlib \
+    pandas
+
+WORKDIR /scripts
+CMD ["python"]

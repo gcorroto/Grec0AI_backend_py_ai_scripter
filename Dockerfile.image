@@ -1,0 +1,34 @@
+# Dockerfile para procesamiento avanzado de imágenes e IA generativa
+FROM python:3.9-slim
+
+# Instalar dependencias del sistema
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    build-essential \
+    libgl1-mesa-glx \
+    libglib2.0-0 \
+    && rm -rf /var/lib/apt/lists/*
+
+# Librerías para procesamiento de imágenes
+RUN pip install --no-cache-dir \
+    pillow \
+    opencv-python-headless \
+    scikit-image \
+    imageio \
+    imageio-ffmpeg \
+    albumentations \
+    imgaug \
+    pytesseract \
+    qrcode \
+    pyzbar \
+    face-recognition \
+    dlib \
+    mediapipe \
+    rembg \
+    numpy \
+    scipy \
+    matplotlib \
+    seaborn
+
+WORKDIR /scripts
+CMD ["python"]

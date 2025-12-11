@@ -1,0 +1,27 @@
+# Dockerfile para modelado 3D y geometría computacional
+FROM python:3.9-slim
+
+# Instalar dependencias del sistema
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    build-essential \
+    libgl1-mesa-glx \
+    && rm -rf /var/lib/apt/lists/*
+
+# Librerías para 3D y geometría
+RUN pip install --no-cache-dir \
+    trimesh \
+    pyvista \
+    meshio \
+    open3d \
+    pyglet \
+    pyrr \
+    shapely \
+    scipy \
+    numpy \
+    matplotlib \
+    pillow \
+    networkx
+
+WORKDIR /scripts
+CMD ["python"]

@@ -1,0 +1,32 @@
+# Dockerfile para análisis de series temporales y forecasting
+FROM python:3.9-slim
+
+# Instalar dependencias del sistema
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
+
+# Librerías especializadas en series temporales
+RUN pip install --no-cache-dir \
+    prophet \
+    statsmodels \
+    pmdarima \
+    arch \
+    tslearn \
+    tsfresh \
+    sktime \
+    darts \
+    pandas \
+    numpy \
+    scipy \
+    matplotlib \
+    seaborn \
+    plotly \
+    pykalman \
+    seasonal \
+    stumpy \
+    pyts
+
+WORKDIR /scripts
+CMD ["python"]
